@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6. Списки</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/prism.css">
+    <script src="https://kit.fontawesome.com/b8991598f2.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1><span class="emoji">📝</span>6. Списки</h1>
+        <p>Теоретический материал</p>
+    </header>
+
+    <nav class="nav">
+        <ul>
+            <li><a href="#создание">🔹 Создание и доступ</a></li>
+            <li><a href="#перебор">🔹 Перебор элементов</a></li>
+            <li><a href="#генераторы">🔹 Генераторы</a></li>
+            <li><a href="#срезы">🔹 Срезы</a></li>
+            <li><a href="#операции">🔹 Операции</a></li>
+            <li><a href="#двумерные">🔹 Двумерные списки</a></li>
+            <li><a href="#методы">🔹 Методы списков</a></li>
+            <li><a href="#сортировка">🔹 Сортировка</a></li>
+            <li><a href="#функции">🔹 Общие функции</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <!-- СОЗДАНИЕ И ДОСТУП -->
+        <section id="создание" class="section">
+            <h2>Создание и доступ</h2>
+            <p><strong>Список (list)</strong> — это упорядоченная изменяемая коллекция объектов произвольных типов.</p>
+            
+            <p>Создание пустого списка:</p>
+            <div class="syntax-block">
+                <pre><code>list_name = []
+list_name = list()</code></pre>
+            </div>
+
+            <p>Обращение к элементам списка происходит с помощью оператора <code>список[индекс]</code>. Нумерация начинается с 0.</p>
+            <p>Массивы можно складывать друг с другом при помощи оператора <code>+</code>.</p>
+        </section>
+
+        <!-- ФУНКЦИИ -->
+        <section id="функции" class="section">
+            <h2>Общие функции работы с коллекциями</h2>
+
+            <div class="function-block">
+                <div class="function-signature">len(список)</div>
+                <div class="function-description">Возвращает длину списка.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">max(список) / min(список)</div>
+                <div class="function-description">Возвращает максимальный / минимальный элемент.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">sum(список)</div>
+                <div class="function-description">Возвращает сумму элементов (если это числа).</div>
+            </div>
+        </section>
+
+        <!-- ПЕРЕБОР -->
+        <section id="перебор" class="section">
+            <h2>Перебор элементов списка</h2>
+            
+            <h3>1 способ: Перебор элементов</h3>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [4, 8, 65, 222, 45]
+for item in lst:
+    print(item)</code></pre>
+            </div>
+            <p>Данный способ позволяет извлекать элементы последовательно. Обратиться к соседним элементам или изменить сам список сложнее.</p>
+
+            <h3>2 способ: Перебор по индексам</h3>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [4, 8, 65, 222, 45]
+for i in range(len(lst)):
+    print(lst[i])</code></pre>
+            </div>
+            <p>При данном подходе имеется возможность обращаться к соседним элементам по индексу (например, <code>i+1</code>).</p>
+        </section>
+
+        <!-- ГЕНЕРАТОРЫ -->
+        <section id="генераторы" class="section">
+            <h2>Генераторы списков</h2>
+            <p>Синтаксическая конструкция для создания списков из других последовательностей.</p>
+            <div class="syntax-block">
+                <pre><code>список = [выражение for переменная in последовательность if условие]</code></pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Пример:</h4>
+                <div class="pre-code">
+                    <pre class="line-numbers match-braces"><code class="language-python"># Получить строки длиннее 3 символов
+words = ['xxx', 'xxxx', 'xx', 'xxxxx', 'xxxxxx']
+lst = [w for w in words if len(w) > 3]
+print(lst) # ['xxxx', 'xxxxx', 'xxxxxx']</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- СРЕЗЫ -->
+        <section id="срезы" class="section">
+            <h2>Срезы</h2>
+            <p>Срезы позволяют получить копию части списка. Результатом среза всегда является список.</p>
+            <div class="important">
+                <p><code>список[начало : конец : шаг]</code></p>
+                <ul>
+                    <li><strong>начало</strong> — индекс начала (включительно). По умолчанию 0.</li>
+                    <li><strong>конец</strong> — индекс конца (не включительно). По умолчанию длина списка.</li>
+                    <li><strong>шаг</strong> — шаг извлечения. По умолчанию 1.</li>
+                </ul>
+            </div>
+
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">nums = [1, 2, 3, 4, 5]
+
+# Разворот списка
+print(nums[::-1]) # [5, 4, 3, 2, 1]
+
+# Часть списка
+print(nums[2:4]) # [3, 4]
+
+# Элементы на чётных позициях
+print(nums[::2]) # [1, 3, 5]
+
+# Элементы на нечётных позициях
+print(nums[1::2]) # [2, 4]</code></pre>
+            </div>
+        </section>
+
+        <!-- ОПЕРАЦИИ -->
+        <section id="операции" class="section">
+            <h2>Операции со списками</h2>
+
+            <h3>Распаковка списка</h3>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [2, 8, 9]
+x1, x2, x3 = lst
+# x1=2, x2=8, x3=9</code></pre>
+            </div>
+            <p>Количество переменных должно совпадать с количеством элементов.</p>
+
+            <h3>Оператор * (звездочка)</h3>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">nums = [1, 2, 3, 4, 5]
+print(*nums) # 1 2 3 4 5</code></pre>
+            </div>
+
+            <h3>Чтение списка из строки</h3>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python"># Ввод: 45 8 322
+nums = list(map(int, input().split()))
+print(nums) # [45, 8, 322]</code></pre>
+            </div>
+
+            <h3>Удаление (del)</h3>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [4, 8, 65, 222, 45]
+del lst[1] # Удалить элемент с индексом 1
+print(lst) # [4, 65, 222, 45]</code></pre>
+            </div>
+        </section>
+
+        <!-- ДВУМЕРНЫЕ СПИСКИ -->
+        <section id="двумерные" class="section">
+            <h2>Двумерные списки</h2>
+            <p>Список, элементами которого являются другие списки (матрица).</p>
+            <p>Доступ: <code>matrix[строка][столбец]</code></p>
+
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python"># Правильная генерация матрицы 10x10, заполненной нулями
+matrix = [[0] * 10 for _ in range(10)]
+
+# ОШИБКА: Так делать нельзя (создаются ссылки на один и тот же список)
+# matrix = [[0] * 10] * 10</code></pre>
+            </div>
+        </section>
+
+        <!-- МЕТОДЫ -->
+        <section id="методы" class="section">
+            <h2>Методы списков</h2>
+
+            <div class="function-block">
+                <div class="function-signature">append(значение)</div>
+                <div class="function-description">Добавляет элемент в конец списка.</div>
+            </div>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [1, 2]
+lst.append(3)
+print(lst) # [1, 2, 3]</code></pre>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">insert(индекс, значение)</div>
+                <div class="function-description">Вставляет элемент на указанную позицию.</div>
+            </div>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [1, 2]
+lst.insert(0, 0)
+print(lst) # [0, 1, 2]</code></pre>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">pop([индекс])</div>
+                <div class="function-description">Удаляет элемент по индексу и возвращает его. Если индекс не указан, удаляет последний элемент.</div>
+            </div>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [10, 20, 30]
+val = lst.pop() 
+print(val) # 30
+print(lst) # [10, 20]
+
+val2 = lst.pop(0)
+print(val2) # 10</code></pre>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">remove(значение)</div>
+                <div class="function-description">Удаляет первое вхождение указанного значения. Вызывает ошибку, если элемент не найден.</div>
+            </div>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [1, 2, 3, 2]
+lst.remove(2)
+print(lst) # [1, 3, 2]</code></pre>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">index(значение, [start], [end])</div>
+                <div class="function-description">Возвращает индекс первого вхождения значения.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">count(значение)</div>
+                <div class="function-description">Возвращает количество вхождений значения в списке.</div>
+            </div>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [1, 2, 1, 3, 1]
+print(lst.count(1)) # 3</code></pre>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">clear()</div>
+                <div class="function-description">Удаляет все элементы из списка.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">copy()</div>
+                <div class="function-description">Создает поверхностную копию списка.</div>
+            </div>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [1, 2, 3]
+new_lst = lst.copy()
+new_lst[0] = 100
+print(lst) # [1, 2, 3]
+print(new_lst) # [100, 2, 3]</code></pre>
+            </div>
+        </section>
+
+        <!-- СОРТИРОВКА -->
+        <section id="сортировка" class="section">
+            <h2>Сортировка списков</h2>
+
+            <div class="function-block">
+                <div class="function-signature">sort(key=..., reverse=...)</div>
+                <div class="function-description">Сортирует список на месте (изменяет исходный список).<br>
+                <code>reverse</code> — сортировка в обратном порядке (по убыванию).<br>
+                <code>key</code> — функция, которая применяется к каждому элементу перед сравнением.
+                </div>
+            </div>
+            
+            <h3>Примеры использования метода sort()</h3>
+
+            <p>Обычная сортировка:</p>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [1, 2, 5, 4, 0, 5, 14, 0, 8]
+lst.sort()
+print(lst) # [0, 0, 1, 2, 4, 5, 5, 8, 14]</code></pre>
+            </div>
+
+            <p>Сортировка по убыванию (reverse=True):</p>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [1, 2, 5, 4, 0, 5, 14, 0, 8]
+lst.sort(reverse=True)
+print(lst) # [14, 8, 5, 5, 4, 2, 1, 0, 0]</code></pre>
+            </div>
+
+            <p>Сортировка по ключу (key) - по длине строки:</p>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = ['a', 'abba', 'c', 'bb', 's', 'aba', 'bbb']
+lst.sort(key=len)
+print(lst) # ['a', 'c', 's', 'bb', 'aba', 'bbb', 'abba']</code></pre>
+            </div>
+
+            <p>Сортировка по последней букве (lambda):</p>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = ['a', 'abbae', 'c', 'bb', 'sd', 'aba', 'bbb']
+lst.sort(key=lambda x: x[-1])
+print(lst) # ['a', 'aba', 'bb', 'bbb', 'c', 'sd', 'abbae']</code></pre>
+            </div>
+
+            <p>Сортировка по нескольким полям:</p>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [['LastName_A', 'FirstName_A'],
+       ['LastName_B', 'FirstName_Z'],
+       ['LastName_A', 'FirstName_C'],
+       ['LastName_B', 'FirstName_B'],
+       ['LastName_C', 'FirstName_B'],
+       ['LastName_C', 'FirstName_A'],
+       ['LastName_A', 'FirstName_B']]
+# Сначала по фамилии (0), затем по имени (1)
+lst.sort(key=lambda x: (x[0], x[1]))
+print(*lst, sep='\n')
+# ['LastName_A', 'FirstName_A']
+# ['LastName_A', 'FirstName_B']
+# ['LastName_A', 'FirstName_C']
+# ['LastName_B', 'FirstName_B']
+# ...</code></pre>
+            </div>
+
+            <h3>Функция sorted()</h3>
+            <div class="function-block">
+                <div class="function-signature">sorted(список, [key], [reverse])</div>
+                <div class="function-description">Возвращает <strong>новый</strong> отсортированный список, не меняя исходный.</div>
+            </div>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">lst = [3, 1, 2]
+new_lst = sorted(lst)
+print(lst) # [3, 1, 2] - остался прежним
+print(new_lst) # [1, 2, 3] - новый список</code></pre>
+            </div>
+        </section>
+    </main>
+</div>
+<script src="../assets/js/prism.js"></script>
+<script src="../assets/js/script.js"></script>
+</body>
+</html>
