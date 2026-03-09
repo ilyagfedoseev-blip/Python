@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8. Строки</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/prism.css">
+    <script src="https://kit.fontawesome.com/b8991598f2.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1><span class="emoji">📝</span>8. Строки</h1>
+        <p>Теоретический материал</p>
+    </header>
+
+    <nav class="nav">
+        <ul>
+            <li><a href="#создание">🔹 Создание и основы</a></li>
+            <li><a href="#анализ">🔹 Анализ и проверки</a></li>
+            <li><a href="#изменение">🔹 Изменение регистра и очистка</a></li>
+            <li><a href="#поиск">🔹 Поиск и замена</a></li>
+            <li><a href="#разделение">🔹 Разделение и объединение</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <!-- СОЗДАНИЕ И ОСНОВЫ -->
+        <section id="создание" class="section">
+            <h2>Создание и основы</h2>
+            <p><strong>Строка (str)</strong> — это неизменяемая последовательность символов.</p>
+            
+            <p>Строки записываются в двойных или одинарных кавычках.</p>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">s1 = "Hello world"
+s2 = 'Hello world'
+s3 = str(123) # "123"</code></pre>
+            </div>
+
+            <div class="important">
+                <p>Строка является <strong>неизменяемой</strong> (immutable) структурой данных! Нельзя изменить отдельный символ по индексу.</p>
+            </div>
+
+            <h3>Основные операции</h3>
+            <p>К элементам строки можно обращаться так же, как к списку — по индексу.</p>
+            
+            <p><strong>Умножение строк:</strong></p>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">s = 'hello' * 3
+print(s) # hellohellohello</code></pre>
+            </div>
+
+            <h3>Управляющие символы (Esc-последовательности)</h3>
+            <ul>
+                <li><code>\t</code> — табуляция</li>
+                <li><code>\n</code> — перенос строки</li>
+                <li><code>\\</code> — обратный слеш</li>
+                <li><code>\"</code> — кавычка</li>
+            </ul>
+        </section>
+
+        <!-- АНАЛИЗ И ПРОВЕРКИ -->
+        <section id="анализ" class="section">
+            <h2>Анализ и проверки</h2>
+
+            <p>Для проверки наличия подстроки используется оператор <code>in</code>:</p>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">print("lo" in "Hello") # True</code></pre>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">isalpha()</div>
+                <div class="function-description">Возвращает <code>True</code>, если строка состоит только из букв.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">isdigit()</div>
+                <div class="function-description">Возвращает <code>True</code>, если строка состоит только из цифр.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">isnumeric()</div>
+                <div class="function-description">Возвращает <code>True</code>, если строка является числом (включая дробные символы Юникода, но не <code>float</code>).</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">islower() / isupper()</div>
+                <div class="function-description">Проверяет, находится ли строка в нижнем / верхнем регистре.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">startswith(prefix)</div>
+                <div class="function-description">Проверяет, начинается ли строка с указанного префикса.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">endswith(suffix)</div>
+                <div class="function-description">Проверяет, заканчивается ли строка указанным суффиксом.</div>
+            </div>
+        </section>
+
+        <!-- ИЗМЕНЕНИЕ -->
+        <section id="изменение" class="section">
+            <h2>Изменение регистра и очистка</h2>
+            <p>Т.к. строки неизменяемы, эти методы возвращают <strong>новую</strong> строку.</p>
+
+            <div class="function-block">
+                <div class="function-signature">upper()</div>
+                <div class="function-description">Переводит строку в верхний регистр.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">lower()</div>
+                <div class="function-description">Переводит строку в нижний регистр.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">strip([chars])</div>
+                <div class="function-description">Удаляет пробельные символы (или указанные в <code>chars</code>) с обоих концов строки.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">lstrip([chars]) / rstrip([chars])</div>
+                <div class="function-description">Удаляет символы только слева (в начале) / только справа (в конце).</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">zfill(width)</div>
+                <div class="function-description">Дополняет строку нулями слева до указанной длины.</div>
+            </div>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">print("42".zfill(5)) # 00042</code></pre>
+            </div>
+        </section>
+
+        <!-- ПОИСК И ЗАМЕНА -->
+        <section id="поиск" class="section">
+            <h2>Поиск и замена</h2>
+
+            <div class="function-block">
+                <div class="function-signature">find(sub, [start], [end])</div>
+                <div class="function-description">Возвращает индекс первого вхождения подстроки <code>sub</code>. Если не найдено, возвращает <code>-1</code>.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">count(sub, [start], [end])</div>
+                <div class="function-description">Возвращает количество вхождений подстроки.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">replace(old, new, [count])</div>
+                <div class="function-description">Заменяет все (или <code>count</code> первых) вхождения <code>old</code> на <code>new</code>.</div>
+            </div>
+
+            <div class="example-box">
+                <h4>Пример замены (включая нерекурсивную замену)</h4>
+                <div class="pre-code">
+                    <pre class="line-numbers match-braces"><code class="language-python">s = "Hello World"
+print(s.replace("World", "Python")) # Hello Python
+
+# Замена удаляет вхождения, но не выполняет их повторно в уже замененном тексте
+text = "AA"
+# Если бы замена была рекурсивной или циклической, мы могли бы получить бесконечность или странный результат.
+# Здесь каждое вхождение 'A' меняется на 'A A'.
+print(text.replace("A", "A A")) # "A A A A" 
+# Первая 'A' -> 'A A', Вторая 'A' -> 'A A'. Результат склеивается.</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- РАЗДЕЛЕНИЕ И ОБЪЕДИНЕНИЕ -->
+        <section id="разделение" class="section">
+            <h2>Разделение и объединение</h2>
+
+            <div class="function-block">
+                <div class="function-signature">split([sep], [maxsplit])</div>
+                <div class="function-description">Разбивает строку на список подстрок по разделителю <code>sep</code>. По умолчанию — по пробелам.</div>
+            </div>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">text = "one two three"
+print(text.split()) # ['one', 'two', 'three']
+
+data = "12-05-2023"
+print(data.split("-")) # ['12', '05', '2023']</code></pre>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">join(iterable)</div>
+                <div class="function-description">Объединяет список строк в одну строку, вставляя между ними текущую строку-разделитель.</div>
+            </div>
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">words = ['John', 'Mary', 'Peter']
+print(', '.join(words)) # John, Mary, Peter</code></pre>
+            </div>
+        </section>
+
+    </main>
+</div>
+<script src="../assets/js/prism.js"></script>
+<script src="../assets/js/script.js"></script>
+</body>
+</html>
