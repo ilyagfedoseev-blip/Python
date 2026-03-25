@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10. Файлы</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/prism.css">
+    <script src="https://kit.fontawesome.com/b8991598f2.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header class="header">
+        <h1><span class="emoji">📝</span>10. Файлы</h1>
+        <p>Теоретический материал</p>
+    </header>
+
+    <nav class="nav">
+        <ul>
+            <li><a href="#открытие">🔹 Открытие файлов</a></li>
+            <li><a href="#чтение">🔹 Чтение из файла</a></li>
+            <li><a href="#запись">🔹 Запись в файл</a></li>
+            <li><a href="#менеджер-контекста">🔹 Менеджер контекста with</a></li>
+        </ul>
+    </nav>
+
+    <main class="content">
+        <!-- ОТКРЫТИЕ -->
+        <section id="открытие" class="section">
+            <h2>Открытие файлов</h2>
+            <p>Для работы с файлами в Python используется встроенная функция <code>open()</code>, которая возвращает файловый объект.</p>
+
+            <div class="function-block">
+                <div class="function-signature">open(file, mode='r', encoding=None)</div>
+                <div class="function-description">
+                    <strong>Параметры:</strong><br>
+                    <code>file</code> — путь к файлу (абсолютный или относительный).<br>
+                    <code>mode</code> — режим доступа к файлу.<br>
+                    <code>encoding</code> — кодировка (рекомендуется использовать 'utf-8').
+                </div>
+            </div>
+
+            <div class="important">
+                <h3>Режимы открытия файла (mode):</h3>
+                <ul>
+                    <li><code>'r'</code> — чтение (по умолчанию). Файл должен существовать.</li>
+                    <li><code>'w'</code> — запись. Создает новый файл или перезаписывает существующий.</li>
+                    <li><code>'x'</code> — эксклюзивное создание. Если файл существует, возникнет ошибка.</li>
+                    <li><code>'a'</code> — дозапись. Данные добавляются в конец файла.</li>
+                    <li><code>'b'</code> — двоичный режим (например, 'rb', 'wb').</li>
+                    <li><code>'+'</code> — режим чтения и записи (обновления).</li>
+                </ul>
+            </div>
+
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python"># Пример открытия файла для чтения
+f = open('data.txt', 'r', encoding='utf-8')
+# ... работа с файлом ...
+f.close() # Обязательно закрываем файл!</code></pre>
+            </div>
+        </section>
+
+        <!-- ЧТЕНИЕ -->
+        <section id="чтение" class="section">
+            <h2>Чтение из файла</h2>
+            <p>Существует несколько способов прочитать содержимое файла.</p>
+
+            <div class="function-block">
+                <div class="function-signature">read([size])</div>
+                <div class="function-description">Читает <code>size</code> символов (или байт). Если <code>size</code> не указан, читает файл целиком.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">readline()</div>
+                <div class="function-description">Читает одну строку из файла.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">readlines()</div>
+                <div class="function-description">Читает все строки файла и возвращает их в виде списка.</div>
+            </div>
+
+            <div class="example-box">
+                <h4>Пример чтения всего файла</h4>
+                <pre class="line-numbers match-braces"><code class="language-python">f = open('example.txt', 'r', encoding='utf-8')
+content = f.read()
+print(content)
+f.close()</code></pre>
+            </div>
+        </section>
+
+        <!-- ЗАПИСЬ -->
+        <section id="запись" class="section">
+            <h2>Запись в файл</h2>
+            <p>Для записи данных используются методы <code>write()</code> и <code>writelines()</code>.</p>
+
+            <div class="function-block">
+                <div class="function-signature">write(text)</div>
+                <div class="function-description">Записывает строку <code>text</code> в файл. Возвращает количество записанных символов.</div>
+            </div>
+
+            <div class="function-block">
+                <div class="function-signature">writelines(lines)</div>
+                <div class="function-description">Записывает список строк <code>lines</code> в файл. Не добавляет переносы строк автоматически!</div>
+            </div>
+
+            <div class="example-box">
+                <h4>Пример записи</h4>
+                <pre class="line-numbers match-braces"><code class="language-python">f = open('output.txt', 'w', encoding='utf-8')
+f.write('Привет, мир!\n')
+f.write('Это новая строка.')
+f.close()</code></pre>
+            </div>
+        </section>
+
+        <!-- МЕНЕДЖЕР КОНТЕКСТА -->
+        <section id="менеджер-контекста" class="section">
+            <h2>Менеджер контекста with</h2>
+            <p>Конструкция <code>with</code> автоматически закрывает файл после завершения блока кода, даже если возникла ошибка. Это рекомендуемый способ работы с файлами.</p>
+            
+            <div class="pre-code">
+                <pre class="line-numbers match-braces"><code class="language-python">with open('file.txt', 'r', encoding='utf-8') as f:
+    content = f.read()
+    print(content)
+# Здесь файл уже закрыт автоматически</code></pre>
+            </div>
+
+            <h3>Построчное чтение файла</h3>
+            <p>Файловый объект является итерируемым, поэтому его можно перебирать в цикле <code>for</code>. Это эффективно по памяти для больших файлов.</p>
+            
+            <div class="example-box">
+                <h4>Пример обработки строк</h4>
+                <pre class="line-numbers match-braces"><code class="language-python">with open('input.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        # line содержит строку вместе с символом переноса \n
+        clean_line = line.strip() # Удаляем лишние пробелы и \n
+        print(clean_line)</code></pre>
+            </div>
+
+            <div class="example-box">
+                <h4>Пример из задачи (подсчет суммы чисел в строках)</h4>
+                <pre class="line-numbers match-braces"><code class="language-python">total_sum = 0
+i = 0
+
+# Предполагается, что в input.txt строки вида "10 20 30"
+with open('input.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        i += 1
+        # Разбиваем строку на числа, преобразуем в int и считаем сумму
+        numbers = list(map(int, line.split()))
+        row_sum = sum(numbers)
+        
+        total_sum += row_sum
+        print(f'Строка {i} - сумма: {row_sum}')
+
+print(f'Общая сумма: {total_sum}')</code></pre>
+            </div>
+        </section>
+
+    </main>
+</div>
+<script src="../assets/js/prism.js"></script>
+<script src="../assets/js/script.js"></script>
+</body>
+</html>
